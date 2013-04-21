@@ -41,15 +41,18 @@ class Calculations
 	@suits = [:D, :C, :H, :S]
 
 	def initialize field, hand
+		@field = field
+		@hand = hand
 		@combined = hand.concat field
-	end
-	def card_count
-		card_numbers = []
+		@card_numbers = []
+		@suit_nums = []
 		for i in nums
 			card_numbers.shift combined.grep(i.num).size
 		end
+		for i in suits
+			suit_nums.shift combined.grep(i.suit).size
+		end
 	end
-
 end
 
 class Player
