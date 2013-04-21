@@ -35,6 +35,25 @@ class Deck
 	end
 end
 
+class Calculations
+	def initialize card
+		@num = card.num
+		@suit = card.num
+	end
+
+end
+
+class Player
+	def initialize
+		@hand = []
+	end
+end
+
+class Field
+	def initialize
+		@field = []
+	end
+end
 # card = Card.new :K, :S
 # deck = Deck.new
 # deck.add_first_card card
