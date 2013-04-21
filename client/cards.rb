@@ -8,8 +8,7 @@ class Card
 		@num = num
 		@suit = suit
 	end
-
-	def cardStrength
+	def card_strength
 		return (@nums.index(num) * 10) + (@suits.index(suit))
 	end
 end
