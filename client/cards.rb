@@ -67,14 +67,11 @@ class Calculations
 	end
 
 	def card_numbers
-		card_nums = []
-		for x in nums
-		 	combined.grep(x.num).size
-		end
+		@combined.each {|x| combined.grep(x).size}
 	end
 
 	def suit_numbers
-		@suits.each {|x| combined.grep(x.suit).size}
+		@suits.each {|x| combined.grep(x).size}
 	end
 end
 
