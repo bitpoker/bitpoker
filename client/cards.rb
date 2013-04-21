@@ -1,5 +1,2 @@
-postal_code[:joker] = 0
-postal_code[:ace] = 1
-postal_code[:jack] = 11
-postal_code[:queen] = 12
-postal_code[:king] = 13
+CARD_NUMS = [2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A]
+CARD_SUITS = [D, C, H, S]
