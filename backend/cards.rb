@@ -53,7 +53,7 @@ class Calculations
 
 		@field = field
 		@hand = hand
-		@combined = hand.concat field
+		@combined = field.concat hand
 		sort_combined
 	end
 
@@ -67,14 +67,11 @@ class Calculations
 	end
 
 	def card_numbers
-		card_nums = []
-		for x in nums
-		 	combined.grep(x.num).size
-		end
+		@nums.each {|x| combined.grep(x).size}
 	end
 
 	def suit_numbers
-		@suits.each {|x| combined.grep(x.suit).size}
+		@suits.each {|x| combined.grep(x).size}
 	end
 end
 
@@ -100,10 +97,10 @@ end
 card = [Card.new(:K, :S), Card.new(:Q, :S),
 		Card.new(:J, :S), Card.new(10, :S),
 		Card.new(9, :S)]
-card1 = [Card.new(5, :S), Card.new(4, :S)]
+card1 = [Card.new(5, :S), Card.new(4, :S), Card.new(8,:S)]
 # deck = Deck.new
 calculations = Calculations.new card, card1
-puts calculations.card_numbers
+puts calculations.sort_combined
 #calculations.card_numbers
 #puts card[0].card_strength
 # deck.add_first_card card
