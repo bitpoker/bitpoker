@@ -36,10 +36,10 @@ class Deck
 	end
 end
 
-card = Card.new :K, :S
-deck = Deck.new
-deck.add_first_card card
-deck.del_card card
+# card = Card.new :K, :S
+# deck = Deck.new
+# deck.add_first_card card
+# deck.del_card card
 
 # methods, variables: snake_cased
 # classes: camelCased
