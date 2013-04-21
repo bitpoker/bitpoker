@@ -28,36 +28,53 @@ class Deck
 		cards.delete card
 	end
 	def del_first
-		cards.delete_at(0)
+		cards.delete_at 0
 	end
 	def del_last
-		cards.delete_at(-1)
+		cards.delete_at -1
 	end
 end
 
 class Calculations
-	def initialize card
-		@num = card.num
-		@suit = card.num
+	attr_accessor :field, :hand, :combined
+	@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]
+	@suits = [:D, :C, :H, :S]
+
+	def initialize field, hand
+		@combined = hand.concat field
+	end
+	def card_count
+		card_numbers = []
+		for i in nums
+			card_numbers.shift combined.grep(i.num).size
+		end
 	end
 
 end
 
 class Player
+	attr_accessor :hand
 	def initialize
 		@hand = []
 	end
 end
 
 class Field
+	attr_accessor :field
 	def initialize
 		@field = []
 	end
+	def add_to_field card
+		field.shift card
+	end
+
 end
 # card = Card.new :K, :S
 # deck = Deck.new
+# calulations = Calculations.new [0, 0], [0, 0, 0]
 # deck.add_first_card card
 # deck.del_card card
+
 
 # methods, variables: snake_cased
 # classes: camelCased
