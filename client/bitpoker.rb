@@ -1,5 +1,3 @@
-Shoes.app {
-  para {
-    "Hello there"
-  }
-}
+Shoes.app do
+  para "Hello there"
+end
