@@ -1,35 +1,43 @@
 class Card
 	attr_accessor :num, :suit
 	attr_accessor :nums, :suits
-	@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]
-	@suits = [:D, :C, :H, :S]
 
 	def initialize num, suit
+		@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]
+		@suits = [:D, :C, :H, :S]
+
 		@num = num
 		@suit = suit
 	end
+
 	def card_strength
 		return (@nums.index(num) * 10) + (@suits.index(suit))
 	end
 end
 
 class Deck
-	attr_accessor :cards 
-	def initialize
-		@cards = []
+	attr_accessor :cards
+
+	def initialize(cards)
+		@cards = cards || []
 	end
+
 	def add_last_card card
 		cards.shift card
 	end
+
 	def add_first_card card
 		cards.unshift card
 	end
+
 	def del_card card
 		cards.delete card
 	end
+
 	def del_first
 		cards.delete_at 0
 	end
+
 	def del_last
 		cards.delete_at -1
 	end
@@ -37,21 +45,36 @@ end
 
 class Calculations
 	attr_accessor :field, :hand, :combined
-	@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]
-	@suits = [:D, :C, :H, :S]
+	attr_accessor :nums, :suits
 
 	def initialize field, hand
+		@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]
+		@suits = [:D, :C, :H, :S]
+
 		@field = field
 		@hand = hand
 		@combined = hand.concat field
-		@card_numbers = []
-		@suit_nums = []
-		for i in nums
-			card_numbers.shift combined.grep(i.num).size
+		sort_combined
+	end
+
+	def sort_combined
+		@combined.sort! do |a, b|
+			@nums.index(a.num) <=> @nums.index(b.num)
 		end
-		for i in suits
-			suit_nums.shift combined.grep(i.suit).size
+		@combined.sort! do |a, b|
+			@suits.index(a.suit) <=> @suits.index(b.suit)
 		end
+	end
+
+	def card_numbers
+		card_nums = []
+		for x in nums
+		 	combined.grep(x.num).size
+		end
+	end
+
+	def suit_numbers
+		@suits.each {|x| combined.grep(x.suit).size}
 	end
 end
 
@@ -64,17 +87,25 @@ end
 
 class Field
 	attr_accessor :field
+
 	def initialize
 		@field = []
 	end
+
 	def add_to_field card
 		field.shift card
 	end
 
 end
-# card = Card.new :K, :S
+card = [Card.new(:K, :S), Card.new(:Q, :S),
+		Card.new(:J, :S), Card.new(10, :S),
+		Card.new(9, :S)]
+card1 = [Card.new(5, :S), Card.new(4, :S)]
 # deck = Deck.new
-# calulations = Calculations.new [0, 0], [0, 0, 0]
+calculations = Calculations.new card, card1
+puts calculations.card_numbers
+#calculations.card_numbers
+#puts card[0].card_strength
 # deck.add_first_card card
 # deck.del_card card
 
