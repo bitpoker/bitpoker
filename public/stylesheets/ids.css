@@ -1,7 +1,10 @@
 #title {
-		font-family:"PlayFair Display SC", sans-serif;
+		font-family:'PlayFair Display SC', serif;
 }
 
+#version {
+		
+
 #login_button {
-		align: "center";
+		align: 'center';
 }
