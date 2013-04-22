@@ -1,4 +1,4 @@
-@import url("http://fonts.googleapis.com/css?family=Playfair+Display+SC");
+@import url("fonts.css");
 @import url("ids.css");
 
 /* line 4, ../../../../.rvm/gems/ruby-2.0.0-p0/gems/zurb-foundation-4.0.9/scss/foundation/components/_global.scss */
@@ -22,7 +22,7 @@ body {
   color: #222222;
   padding: 0;
   margin: 0;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: normal;
   font-style: normal;
   line-height: 1;
