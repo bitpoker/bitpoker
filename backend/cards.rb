@@ -122,7 +122,7 @@ end
 
 class Field
 	attr_accessor :field
-p
+
 	def initialize
 		@field = []
 	end
