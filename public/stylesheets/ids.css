@@ -12,10 +12,11 @@
 }
 
 #login_button {
-		align: center;
+		position:relative;
+		left:600px;
 }
 
 #game {
-		width=100%;
-		height=
+		width=1000px;
+		height=500px;
 }
