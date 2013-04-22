@@ -1,9 +1,12 @@
 #title {
 		font-family:'PlayFair Display SC', serif;
+		margin-bottom:0;
 }
 
 #version {
-		
+		text-size: 0.7em;
+		line-height: 0.7em;
+}
 
 #login_button {
 		align: center;
