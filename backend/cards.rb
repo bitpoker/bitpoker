@@ -122,10 +122,11 @@ end
 
 class Field
 	attr_accessor :field
-
+p
 	def initialize
 		@field = []
 	end
+
 
 	def add_to_field card
 		field.shift card
