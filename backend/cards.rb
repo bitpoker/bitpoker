@@ -67,11 +67,49 @@ class Calculations
 	end
 
 	def card_numbers
-		@nums.each {|x| combined.grep(x).size}
+		@combined_nums = combined.map { |x| x.num}
+		nums.map do |x|
+			combined_nums.count x
+		end
 	end
 
 	def suit_numbers
-		@suits.each {|x| combined.grep(x).size}
+		@combined_suit = combined.map { |x| x.suit }
+		suits.map do |x|
+			combined_suit.count x
+		end
+	end
+
+	def straight_flush
+		numbers = []
+		combined.each {|x| numbers = x.card_strength - combined.index(x)}
+		return numbers.length - numbers.uniq.length > 4
+	end
+
+	def full_house
+		combined.combined_nums.count(3) > 0 && combined.combined_nums.count(2) > 0
+	end
+
+	def flush
+		combined.suit_numbers > 4
+	end
+
+	def straight
+		numbers = []
+		combined.each {|x| numbers = nums.index(x.num) - combined.index(x)}
+		return numbers.size - numbers.uniq.size > 4
+	end
+
+	def three_of_a_kind
+		combined.combined_nums.count(3) > 0
+	end
+
+	def two_pair
+		combined.combined_nums.count(2) > 1	
+	end
+
+	def pair
+		combined.combined_nums.count(2) > 0
 	end
 end
 
@@ -99,8 +137,9 @@ card = [Card.new(:K, :S), Card.new(:Q, :S),
 		Card.new(9, :S)]
 card1 = [Card.new(5, :S), Card.new(4, :S), Card.new(8,:S)]
 # deck = Deck.new
-calculations = Calculations.new card, card1
-puts calculations.sort_combined
+calc = Calculations.new card, card1
+#calc.card_numbers
+puts calc.straight
 #calculations.card_numbers
 #puts card[0].card_strength
 # deck.add_first_card card
