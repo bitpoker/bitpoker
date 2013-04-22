@@ -11,7 +11,7 @@
 		line-height: 0.7em;
 }
 
-#login_button {
+.button.login_button {
 		position:relative;
 		left:600px;
 }
