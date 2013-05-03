@@ -11,13 +11,11 @@
 		<link rel="stylesheet" href="stylesheets/app.css" />
 		
 		<script src="javascripts/vendor/custom.modernizr.js"></script>
-		<%= 
-			 $p1 = Player.new(hi, 10)
-			 $p2 = Player.new(cat, 8)
-			 $p3 = Player.new(user, 9)
-			 $game = Game.new( [ $p1, $p2, $p3 ] )
-			 %>
 	</head>
+	<body>
+		<div class="row" id="header">
+			<div class="large-12 columns">
+				<h1 id="title">BitPoker</h1>
 				<p id="version">version 0.0.1 alpha</p>
 				<hr/>
 				<br/>
@@ -26,14 +24,7 @@
 		
 		<div class="row">
 			<div class="large-12 columns">
-				
-				<div class="row">
-					
-				</div>
-				<br/>
-
-				<div class="row">
-				</div>
+				<canvas id="game"></canvas>
 			</div>
 		</div>
 		
