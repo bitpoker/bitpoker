@@ -122,19 +122,11 @@ end
 
 class Field
 	attr_accessor :field
-<<<<<<< HEAD
-p
-=======
 
->>>>>>> beta
 	def initialize
 		@field = []
 	end
 
-<<<<<<< HEAD
-
-=======
->>>>>>> beta
 	def add_to_field card
 		field.shift card
 	end
@@ -146,12 +138,7 @@ card = [Card.new(:K, :S), Card.new(:Q, :S),
 card1 = [Card.new(5, :S), Card.new(4, :S), Card.new(8,:S)]
 # deck = Deck.new
 calc = Calculations.new card, card1
-<<<<<<< HEAD
-#calc.card_numbers
-puts calc.straight
-=======
 puts calc.card_numbers
->>>>>>> beta
 #calculations.card_numbers
 #puts card[0].card_strength
 # deck.add_first_card card
@@ -159,8 +146,4 @@ puts calc.card_numbers
 
 
 # methods, variables: snake_cased
-<<<<<<< HEAD
 # classes: camelCased
-=======
-# classes: camelCased
->>>>>>> beta
