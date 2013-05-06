@@ -1,0 +1,38 @@
+//= require foundation_and_overrides
+
+@import "settings";
+@import "foundation";
+
+#header {
+	#title {
+		margin-bottom: -.3em;
+	}
+
+	#version {
+		font-size: .8em;
+	}
+}
+
+#instructions {
+	margin-bottom: 30px;
+}
+
+#login-wrapper {
+	text-align: center;
+
+	label {
+		text-align: left;
+		cursor: default;
+		margin-bottom: 10px;
+	}
+}
+
+#login_button {
+	width: 100%;
+	float: right;
+}
+
+#register_button {
+	width: 100%;
+}
+
