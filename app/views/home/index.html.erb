@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>BitPoker</title>
 
-  <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "vendor/custom.modernizr" %>
 </head>
 <body>
@@ -20,30 +19,28 @@
 		</div>
 	</div>
 
+  <h3 id="welcome_message">Welcome to BitPoker!</h3>
+
 	<div class="row" id="login-wrapper">
-		<div class="large-12 small-12 columns">
-      <h3 id="welcome_message">Welcome to BitPoker!</h3>
-      <div id="instructions">Login or Register below.</div>
-			<div class="row">
-				<div class="large-6 large-centered small-10 small-centered columns">
-					<label>Email</label>
-					<input type="text" placeholder="arst@neio.com">
-				</div>
+		<div class="row">
+			<div class="large-6 large-centered small-10 small-centered columns">
+				<label>Email</label>
+				<input type="text" placeholder="arst@neio.com">
 			</div>
-			<div class="row">
-				<div class="large-6 large-centered columns">
-					<label>Password</label>
-					<input type="password" placeholder="password">
-				</div>
+		</div>
+		<div class="row">
+			<div class="large-6 large-centered columns">
+				<label>Password</label>
+				<input type="password" placeholder="password">
 			</div>
-			<div class="row">
-        <div class="large-2 columns push-4">
-          <a href="play" class="button" id="login_button">Login</a>
-        </div>
-        <div class="large-2 columns pull-4">
-          <a href="" class="button" id="register_button">Register</a>
-        </div>
-			</div>
+		</div>
+		<div class="row" id="button_row">
+      <div class="large-2 columns push-4">
+        <a href="play" class="button" id="login_button">Login</a>
+      </div>
+      <div class="large-2 columns pull-4">
+        <a href="" class="button" id="register_button">Register</a>
+      </div>
 		</div>
 	</div>
 </body>

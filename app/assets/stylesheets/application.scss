@@ -3,6 +3,14 @@
 @import "settings";
 @import "foundation";
 
+html {
+	height: 100%;
+}
+
+body {
+	position: static;
+}
+
 #header {
 	#title {
 		margin-bottom: -.3em;
@@ -13,26 +21,29 @@
 	}
 }
 
-#instructions {
-	margin-bottom: 30px;
+#welcome_message {
+	text-align: center;
 }
 
 #login-wrapper {
-	text-align: center;
+	margin-top: 50px;
 
 	label {
 		text-align: left;
 		cursor: default;
 		margin-bottom: 10px;
 	}
-}
 
-#login_button {
-	width: 100%;
-	float: right;
-}
+	#button_row {
+		margin-top: 20px;
 
-#register_button {
-	width: 100%;
-}
+		#login_button {
+			width: 100%;
+			float: right;
+		}
 
+		#register_button {
+			width: 100%;
+		}
+	}
+}
