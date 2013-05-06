@@ -4,6 +4,7 @@ Bitpoker::Application.routes.draw do
 
 	root :to => 'home#index'
 	resources :play
+	resources :example
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
