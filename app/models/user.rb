@@ -1,3 +1,9 @@
 class User < ActiveRecord::Base
-  attr_accessible :crypted_password, :email, :password_salt, :persistence_token, :username
+  acts_as_authentic
+  attr_accessible :username, :email, :password, :password_confirmation
+
+  validates :email, :presence=> true
+  validates :username, :presence => true
+  #validates :crypted_password, :presence => true
+  
 end
