@@ -6,7 +6,4 @@ class User < ActiveRecord::Base
     c.merge_validates_length_of_password_field_options({:minimum => 8})
   end
 
-  # regex to require good password
-  validates_format_of :password, :with => /^(?=.\d)(?=.([a-z]|[A-Z]))([\x20-\x7E]){8,40}$/, :if => :require_password?, :message => "must include one number, one letter, and be between 6 and 40 characters"
-
 end

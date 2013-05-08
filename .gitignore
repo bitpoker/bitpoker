@@ -24,6 +24,9 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
+# Ignore VIM files
+*.swp
+
 # Backups
 *~
 \#*\#
