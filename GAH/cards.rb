@@ -113,10 +113,16 @@ class Calculations
 	end
 end
 
-class Player
+class Hand
 	attr_accessor :hand
 	def initialize
 		@hand = []
+	end
+	def add_card card
+		cards.push card
+	end
+	def rm_card card
+		cards.delete card
 	end
 end
 
