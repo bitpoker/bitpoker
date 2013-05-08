@@ -7,7 +7,6 @@ class Game
 	attr_accessor :bet
 	
 	@@players = Array.new()
-	@@Number numPlayers
 	@@Number bet = NULL
 
 	def initialize(players)
