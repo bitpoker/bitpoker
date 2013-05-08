@@ -1,7 +1,11 @@
 require 'player_info.rb'
+require 'cards.rb'
 
 class Game
-
+	attr_accessor :players
+	attr_accessor :numPlayers
+	attr_accessor :bet
+	
 	@@players = Array.new()
 	@@Number numPlayers
 	@@Number bet = NULL
@@ -19,20 +23,21 @@ class Game
 end
 
 class Round < Game
-
+	attr_accessor :roundPlayers
+	
 	@@roundPlayers = Game.other_array
 
 	def raise(value)
 		if Player.getMoney <= value && bet <= Player.getMoney
-		bet = value
-		@bet
+			bet = value
+				return @value
 		else
-			puts "Money must be greater than bet"
+			puts "Money must be greater than raise"
 	end
 
 	def call(value)
 		if money >= bet
-			@bet
+			return @bet
 		else
 			puts "Money must be greater than bet"
 	end
@@ -52,5 +57,5 @@ elsif turn == "call"
 elsif turn == "fold"
 
 elsif turn == "check"
-	#if no bet so far
+	if bet == NULL
 		bet = 0
