@@ -4,15 +4,15 @@ class Player
 	@@Number money
 
 	def initialize(username, money)
-		@username=username
-		@money=money	
+		@username = username
+		@money = money	
 	end
 
 	def getName()
-		@username
+		return @username
 	end
 	
 	def getMoney()
-		@money
+		return @money
 	end
 end	
