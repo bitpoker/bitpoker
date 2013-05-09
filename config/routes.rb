@@ -1,5 +1,5 @@
 Bitpoker::Application.routes.draw do
-  resources :users
+  resources :users, :user_sessions
 
 
   # The priority is based upon order of creation:
@@ -8,6 +8,8 @@ Bitpoker::Application.routes.draw do
 	root :to => 'home#index'
 	resources :play
 	resources :example
+    match 'login' => 'user_sessions#new', :as => :login
+    match 'logout' => 'user_sessions#destroy', :as => :logout
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
