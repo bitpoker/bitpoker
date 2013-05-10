@@ -1,34 +1,40 @@
+<!DOCTYPE html>
 <!--[if IE 8]> <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-  <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BitPoker</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag "vendor/custom.modernizr" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <div class="row">
-    <div class="large-12 small-12 columns" id="nav">
-      <%= link_to "Register", :register %> |
-      <%= link_to "Login", :login %>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "vendor/custom.modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="row">
+      <div class="large-12 small-12 columns" id="nav">
+        <% if current_user %>
+        Welcome, <%= current_user.full_name %>.
+        <a href="/users/<%= current_user.id %>">Profile</a> |
+        <%= link_to 'Logout', :logout %>
+        <% else %>
+        <%= link_to 'Register', :register %> |
+        <%= link_to 'Login', :login %>
+        <% end %>
+      </div>
     </div>
-  </div>
 
-  <div class="row" id="header">
-    <div class="large-12 small-12 columns">
-      <h1 id="title">BitPoker</h1>
-      <span id="version">version 0.0.2 alpha</span>
-      <hr/>
-      <br/>
+    <div class="row" id="header">
+      <div class="large-12 small-12 columns">
+        <h1 id="title">BitPoker</h1>
+        <span id="version">version 0.0.2 alpha</span>
+        <hr/>
+        <br/>
+      </div>
     </div>
-  </div>
-  
-  <%= yield %>
+    
+    <%= yield %>
 
-</body>
+  </body>
 </html>

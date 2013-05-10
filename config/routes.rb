@@ -1,13 +1,10 @@
 Bitpoker::Application.routes.draw do
-  resources :users, :user_sessions
-
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  root :to => 'user_sessions#new'
-  resources :play
-  resources :example
+  root :to => 'play#index'
+  resources :users, :user_sessions, :example, :play
+
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
   match 'register' => 'users#new', :as => :register

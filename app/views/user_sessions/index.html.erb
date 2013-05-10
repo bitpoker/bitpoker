@@ -1,4 +1,10 @@
-<h1>Listing user_sessions</h1>
+<div class="row">
+  <div class="large-12 small-12 columns">
+    <p id="notice"><%= flash[:notice] %></p>
+  </div>
+</div>
+
+<h3 id="title-message">User Sessions</h1>
 
 <table>
   <tr>
@@ -9,7 +15,7 @@
     <th></th>
   </tr>
 
-<% @user_sessions.each do |user_session| %>
+<% UserSession.each do |user_session| %>
   <tr>
     <td><%= user_session.email %></td>
     <td><%= user_session.password %></td>
