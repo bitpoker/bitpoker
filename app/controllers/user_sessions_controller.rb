@@ -44,7 +44,7 @@ class UserSessionsController < ApplicationController
 
     respond_to do |format|
       if @user_session.save
-        format.html { redirect_to :user, notice: 'User session was successfully created.' }
+        format.html { redirect_to :users, notice: 'User session was successfully created.' }
         format.json { render json: @user_session, status: :created, location: @user_session }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class UserSessionsController < ApplicationController
 
     respond_to do |format|
       if @user_session.update_attributes(params[:user_session])
-        format.html { redirect_to :user, notice: 'Logged in.' }
+        format.html { redirect_to :users, notice: 'Logged in.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
