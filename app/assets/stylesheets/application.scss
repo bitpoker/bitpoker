@@ -13,11 +13,17 @@ body {
 
 #header {
     #title {
-	margin-bottom: -.3em;
+	margin-bottom: -.9em;
+	vertical-align: top;
+
+	img {
+	    height: 1.7em;
+	}
     }
 
     #version {
 	font-size: .8em;
+	margin-left: 1em;
     }
 }
 

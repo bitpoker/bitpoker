@@ -1,3 +1,4 @@
+<%= javascript_include_tag "play.js" %>
 <div class="row">
   <div class="large-12 small-12 columns">
     <p id="notice"><%= flash[:notice] %></p>
@@ -6,7 +7,7 @@
 </div>
 
 <div class="row">
-  <div class="large-12 columns">
+  <div class="large-12 small-12 columns">
     This is play, meaning you're logged in.
     <canvas id="game"></canvas>
   </div>
