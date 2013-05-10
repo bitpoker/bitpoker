@@ -40,18 +40,9 @@ body {
     }
 }
 
-#register-wrapper > .row,
-#login-wrapper > .row {
-    margin: 0;
-}
-
 .row {
+    table,
     .button {
 	width: 100%;
     }
-}
-
-
-.row table {
-    width: 100%;
 }
