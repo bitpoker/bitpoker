@@ -18,7 +18,7 @@ class UserSessionsControllerTest < ActionController::TestCase
 
   test "should create user_session" do
     assert_difference('UserSession.count') do
-      post :create, user_session: { password: @user_session.password, username: @user_session.username }
+      post :create, user_session: { email: @user_session.email, password: @user_session.password }
     end
 
     assert_redirected_to user_session_path(assigns(:user_session))
@@ -35,7 +35,7 @@ class UserSessionsControllerTest < ActionController::TestCase
   end
 
   test "should update user_session" do
-    put :update, id: @user_session, user_session: { password: @user_session.password, username: @user_session.username }
+    put :update, id: @user_session, user_session: { email: @user_session.email, password: @user_session.password }
     assert_redirected_to user_session_path(assigns(:user_session))
   end
 

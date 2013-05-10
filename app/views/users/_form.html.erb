@@ -1,33 +1,51 @@
 <%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<% if @user.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+n  </ul>
+</div>
+<% end %>
+
+<div class="row" id="register-wrapper">
+  <div class="row">
+    <div class="large-6 large-centered small-10 small-centered columns field">
+      <%= f.label :full_name %>
+      <%= f.text_field :full_name, :placeholder => 'Arst Neio' %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
+  <div class="row">
+    <div class="large-6 large-centered small-10 small-centered columns field">
+      <%= f.label :username %>
+      <%= f.text_field :username, :placeholder => 'arsteh1337' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
+  <div class="row">
+    <div class="large-6 large-centered small-10 small-centered columns field">
+      <%= f.label :email %>
+      <%= f.text_field :email, :placeholder => 'arst@neio.com' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
+  <div class="row">
+    <div class="large-6 large-centered small-10 small-centered columns field">
+      <%= f.label :password %>
+      <%= f.password_field :password, :placeholder => 'password' %>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="row">
+    <div class="large-6 large-centered small-10 small-centered columns field">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, :placeholder => 'password' %>
+    </div>
   </div>
+  <div class="row" id="button-row">
+    <div class="large-3 large-centered small-4 small-centered columns actions">
+      <%= f.submit 'Submit', :class => 'button' %>
+    </div>
+  </div>
+</div>
 <% end %>

@@ -1,4 +1,26 @@
 class UserSessionsController < ApplicationController
+  # GET /user_sessions
+  # GET /user_sessions.json
+  def index
+    @user_sessions = UserSession.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @user_sessions }
+    end
+  end
+
+  # GET /user_sessions/1
+  # GET /user_sessions/1.json
+  def show
+    @user_session = UserSession.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @user_session }
+    end
+  end
+
   # GET /user_sessions/new
   # GET /user_sessions/new.json
   def new
@@ -10,6 +32,11 @@ class UserSessionsController < ApplicationController
     end
   end
 
+  # GET /user_sessions/1/edit
+  def edit
+    @user_session = UserSession.find(params[:id])
+  end
+
   # POST /user_sessions
   # POST /user_sessions.json
   def create
@@ -17,7 +44,7 @@ class UserSessionsController < ApplicationController
 
     respond_to do |format|
       if @user_session.save
-        format.html { redirect_to :users, notice: 'Login Successful' }
+        format.html { redirect_to :play, notice: 'User session was successfully created.' }
         format.json { render json: @user_session, status: :created, location: @user_session }
       else
         format.html { render action: "new" }
@@ -26,14 +53,30 @@ class UserSessionsController < ApplicationController
     end
   end
 
+  # PUT /user_sessions/1
+  # PUT /user_sessions/1.json
+  def update
+    @user_session = UserSession.find(params[:id])
+
+    respond_to do |format|
+      if @user_session.update_attributes(params[:user_session])
+        format.html { redirect_to :play, notice: 'Logged in.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @user_session.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /user_sessions/1
   # DELETE /user_sessions/1.json
   def destroy
-    @user_session = UserSession.find
+    @user_session = UserSession.find(params[:id])
     @user_session.destroy
 
     respond_to do |format|
-      format.html { redirect_to :users, notice: 'Logged out successfully' }
+      format.html { redirect_to :login, notice: 'Logged out.' }
       format.json { head :no_content }
     end
   end

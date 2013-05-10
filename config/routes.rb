@@ -5,11 +5,12 @@ Bitpoker::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-	root :to => 'home#index'
-	resources :play
-	resources :example
-    match 'login' => 'user_sessions#new', :as => :login
-    match 'logout' => 'user_sessions#destroy', :as => :logout
+  root :to => 'user_sessions#new'
+  resources :play
+  resources :example
+  match 'login' => 'user_sessions#new', :as => :login
+  match 'logout' => 'user_sessions#destroy', :as => :logout
+  match 'register' => 'users#new', :as => :register
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
