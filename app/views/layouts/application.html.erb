@@ -10,10 +10,20 @@
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= csrf_meta_tags %>
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-40855922-1', 'bitcoin.com.au');
+    ga('send', 'pageview');
+    </script>
   </head>
   <body>
     <div class="row">
-      <div class="large-12 small-12 columns" id="nav">
+      <div class="large-6 small-6 columns" id="nav">
         <% if current_user %>
         Welcome, <%= current_user.full_name %>.
         <a href="/users/<%= current_user.id %>">Profile</a> |
