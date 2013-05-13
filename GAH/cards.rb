@@ -136,8 +136,13 @@ class Field
 	def add_to_field card
 		field.shift card
 	end
-
+	
+	def add_to_field numCards
+		while 
+		end
+	end
 end
+
 card = [Card.new(:K, :S), Card.new(:Q, :S),
 		Card.new(:J, :S), Card.new(10, :S),
 		Card.new(9, :S)]
