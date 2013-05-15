@@ -7,7 +7,6 @@ class Game
 	attr_accessor :bet
 	
 	@@players = Array.new()
-	@@Number bet = NULL
 
 	def initialize(players)
 		@players = players
@@ -23,8 +22,12 @@ end
 
 class Round < Game
 	attr_accessor :roundPlayers
+	attr_accessor :bet
 	
-	@@roundPlayers = Game.other_array
+	def initialize(Game game)
+		@@roundPlayers = Game.other_array
+		@@Number bet = NULL
+	end
 
 	def raise(value)
 		if Player.getMoney <= value && bet <= Player.getMoney
@@ -45,16 +48,32 @@ class Round < Game
 		@roundPlayers = array.delete(Player)
 	end
 
-print "Enter betting action: "
-turn = gets
-if turn == "raise"
-	print "Enter bet raise: "
-	value = gets
-	raise(value)
-elsif turn == "call"
+	def betting_turn
+		for players in roundPlayers
+			print "Enter betting action: "
+				turn = gets
+			if turn == "raise"
+				print "Enter bet raise: "
+				value = gets
+				raise(value)
+			elsif turn == "call"
 
-elsif turn == "fold"
+			elsif turn == "fold"
 
-elsif turn == "check"
-	if bet == NULL
-		bet = 0
+			elsif turn == "check"
+				if bet == NULL
+					bet = 0
+			end
+		end
+	end
+	
+	def play_turn
+		current_field = Field.new()
+		while current_field.field.size < 6
+			#current_field.add_to_field random cards
+		end
+		for players in roundPlayers
+		
+		end
+	end
+end
