@@ -18,28 +18,44 @@ end
 class Deck
 	attr_accessor :cards
 
-	def initialize(cards)
-		@cards = cards || []
+	def initialize
+		@cards = Array.new()
+		for num in Card.nums	
+			for suit in Card.suit
+				@card = Card.new(num, suit)	
+				cards << card
+			end
+		end
 	end
 
 	def add_last_card card
-		cards.shift card
+		#add to end of the deck
+		cards.push card
 	end
 
 	def add_first_card card
+		#add to front of deck
 		cards.unshift card
 	end
 
 	def del_card card
+		#discard card from deck
 		cards.delete card
 	end
 
 	def del_first
+		#discard first card from deck
 		cards.delete_at 0
 	end
 
 	def del_last
+		#discard last card from deck
 		cards.delete_at -1
+	end
+
+	def shift_to_field (numCards, Field)
+		#moves cards from top of deck to field
+		Field.field.push cards.slice(0, numCards)
 	end
 end
 
@@ -131,15 +147,6 @@ class Field
 
 	def initialize
 		@field = []
-	end
-
-	def add_to_field card
-		field.shift card
-	end
-	
-	def add_to_field numCards
-		while 
-		end
 	end
 end
 
