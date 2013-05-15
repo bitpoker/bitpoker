@@ -142,19 +142,3 @@ class Field
 		end
 	end
 end
-
-card = [Card.new(:K, :S), Card.new(:Q, :S),
-		Card.new(:J, :S), Card.new(10, :S),
-		Card.new(9, :S)]
-card1 = [Card.new(5, :S), Card.new(4, :S), Card.new(8,:S)]
-# deck = Deck.new
-calc = Calculations.new card, card1
-puts calc.card_numbers
-#calculations.card_numbers
-#puts card[0].card_strength
-# deck.add_first_card card
-# deck.del_card card
-
-
-# methods, variables: snake_cased
-# classes: camelCased
