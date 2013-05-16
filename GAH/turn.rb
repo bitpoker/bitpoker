@@ -5,7 +5,7 @@ class Game
 	attr_accessor :players
 	attr_accessor :numPlayers
 	attr_accessor :bet
-	
+
 	@@players = Array.new()
 
 	def initialize(players)
@@ -23,7 +23,9 @@ end
 class Round < Game
 	attr_accessor :roundPlayers
 	attr_accessor :bet
-	
+	attr_accessor :field
+	attr_accessor :deck
+
 	def initialize(Game game)
 		@@roundPlayers = Game.other_array
 		@@Number bet = NULL
@@ -49,31 +51,28 @@ class Round < Game
 	end
 
 	def betting_turn
-		for players in roundPlayers
-			print "Enter betting action: "
-				turn = gets
-			if turn == "raise"
-				print "Enter bet raise: "
-				value = gets
-				raise(value)
-			elsif turn == "call"
-
-			elsif turn == "fold"
-
-			elsif turn == "check"
-				if bet == NULL
-					bet = 0
+		print "Enter betting action: "
+		turn = gets
+		if turn == "raise"
+			print "Enter bet raise: "
+			value = gets
+			raise(value)
+		elsif turn == "call"
+			call
+		elsif turn == "fold"
+			fold
+		elsif turn == "check"
+			if bet == NULL
+				bet = 0
 			end
 		end
 	end
-	
+
 	def play_turn
-		current_field = Field.new()
-		while current_field.field.size < 6
-			#current_field.add_to_field random cards
-		end
+		@field = Field.new()
+		@deck = Deck.new()
 		for players in roundPlayers
-		
+			betting_turn
 		end
 	end
 end
