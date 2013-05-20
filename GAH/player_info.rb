@@ -1,25 +1,21 @@
 require 'cards.rb'
 
-class User_Info
+class User
 	attr_accessor :username
 	attr_accessor :money
+	attr_accessor :hand
 
 	def initialize(username, money)
 		@username = username
 		@money = money	
+		@hand = Hand.new
 	end
 
-	def getName
+	def get_name
 		return @username
 	end
 	
-	def getMoney
+	def get_money
 		return @money
 	end
 end	
-
-class Player < User_Info
-	attr_accessor :hand
-	
-	@hand = Hand.new
-end

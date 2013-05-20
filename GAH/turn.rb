@@ -5,30 +5,25 @@ class Game
 	attr_accessor :players
 	attr_accessor :numPlayers
 	attr_accessor :bet
-	
-	@@players = Array.new()
+	attr_accessor :field
+	attr_accessor :deck
 
 	def initialize(players)
-		@players = players
+		@players = Array.new(players)
 		@numPlayers = players.size
 	end
 
-	def addPlayer(player)
+	def add_player(player)
 		if numPlayers < 7
 			players << player
 			numPlayers += 1
+		end
 	end
-end
 
-class Round < Game
-	attr_accessor :roundPlayers
-	attr_accessor :bet
-	attr_accessor :field
-	attr_accessor :deck
-	
-	def initialize(Game game)
-		@@roundPlayers = Game.other_array
-		@@Number bet = NULL
+	def rm_player(player)
+		if players.include?(player)
+			players.delete(player)
+		end
 	end
 
 	def raise(value)
@@ -37,6 +32,7 @@ class Round < Game
 				return @value
 		else
 			puts "Money must be greater than raise"
+		end
 	end
 
 	def call(value)
@@ -44,35 +40,33 @@ class Round < Game
 			return @bet
 		else
 			puts "Money must be greater than bet"
-	end
-
-	def fold
-		@roundPlayers = array.delete(Player)
-	end
-
-	def betting_turn
-		print "Enter betting action: "
-		turn = gets
-		if turn == "raise"
-			print "Enter bet raise: "
-			value = gets
-			raise(value)
-		elsif turn == "call"
-			call
-		elsif turn == "fold"
-			fold
-		elsif turn == "check"
-			if bet == NULL
-				bet = 0
-			end
 		end
 	end
-	
+
 	def play_turn
 		@field = Field.new()
 		@deck = Deck.new()
-		for players in roundPlayers
-			betting_turn			
+		betting_round
+	end
+
+	def betting_round
+		for player in players
+			@roundPlayers = Array.new(players)
+			print "Enter betting action: "
+        	turn = gets
+        	if turn == "raise"
+				print "Enter bet raise: "
+            	value = gets
+            	raise(value)
+        	elsif turn == "call"
+            	call
+        	elsif turn == "fold"
+				@roundPlayers = array.delete(player)
+			elsif turn == "check"
+            	if bet == NULL
+					bet = 0
+				end
+			end
 		end
 	end
 end

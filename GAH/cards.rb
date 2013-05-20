@@ -1,13 +1,15 @@
 class Card
 	attr_accessor :num, :suit
 	attr_accessor :nums, :suits
+	
+	@@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]
+	@@suits = [:D, :C, :H, :S]
 
-	def initialize num, suit
-		@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]
-		@suits = [:D, :C, :H, :S]
-
-		@num = num
-		@suit = suit
+	def initialize(num, suit)
+		if nums.include?(num) && suits.include?(suit)
+			@num = num
+			@suit = suit
+		end
 	end
 
 	def card_strength
@@ -20,32 +22,21 @@ class Deck
 
 	def initialize
 		@cards = Array.new()
-		for num in Card.nums	
-			for suit in Card.suit
-				@card = Card.new(num, suit)	
+		#right now it is in order
+		for num in Card.nums
+			for suit in Card.suits
+				@card = Card.new(num, suit)
 				cards << card
 			end
 		end
 	end
 
-	def add_last_card card
-		#add to end of the deck
-		cards.push card
-	end
-
-	def add_first_card card
-		#add to front of deck
-		cards.unshift card
-	end
-
-	def del_card card
-		#discard card from deck
-		cards.delete card
-	end
+	def del_card(card)
+		discard.push cards.delete(card)
 
 	def del_first
-		#discard first card from deck
-		cards.delete_at 0
+		#discard first card from deck, for burning
+		discard.push cards.delete_at 0
 	end
 
 	def del_last
@@ -53,20 +44,36 @@ class Deck
 		cards.delete_at -1
 	end
 
-	def shift_to_field (numCards, Field)
+	def shift_to_hand(numCards, hand)
+		#moves cards from top of deck to hand
+		hand.push cards.slice!(0, numCards)
+	end
+
+	def shift_to_field(numCards, field)
 		#moves cards from top of deck to field
-		Field.field.push cards.slice(0, numCards)
+		field.push cards.slice!(0, numCards)
+	end
+end
+
+class DiscardPile
+	attr_accessor :discard
+	def initialize
+		@discard = Array.new()
+	end
+
+	def add_to_deck
+		deck.push discard.slice!(0, discard.size-1)
 	end
 end
 
 class Calculations
 	attr_accessor :field, :hand, :combined
 	attr_accessor :nums, :suits
+	
+	@@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]i
+	@@suits = [:D, :C, :H, :S]
 
-	def initialize field, hand
-		@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]
-		@suits = [:D, :C, :H, :S]
-
+	def initialize(field, hand)
 		@field = field
 		@hand = hand
 		@combined = field.concat hand
@@ -121,7 +128,7 @@ class Calculations
 	end
 
 	def two_pair
-		combined.combined_nums.count(2) > 1	
+		combined.combined_nums.count(2) > 1
 	end
 
 	def pair
@@ -134,11 +141,9 @@ class Hand
 	def initialize
 		@hand = []
 	end
-	def add_card card
-		cards.push card
-	end
-	def rm_card card
-		cards.delete card
+
+	def shift_to_field(card)
+		field.push hand.slice!(card)
 	end
 end
 
@@ -148,20 +153,11 @@ class Field
 	def initialize
 		@field = []
 	end
+
+	def discard_field
+		field.clear
+	end
 end
-
-card = [Card.new(:K, :S), Card.new(:Q, :S),
-		Card.new(:J, :S), Card.new(10, :S),
-		Card.new(9, :S)]
-card1 = [Card.new(5, :S), Card.new(4, :S), Card.new(8,:S)]
-# deck = Deck.new
-calc = Calculations.new card, card1
-puts calc.card_numbers
-#calculations.card_numbers
-#puts card[0].card_strength
-# deck.add_first_card card
-# deck.del_card card
-
 
 # methods, variables: snake_cased
 # classes: camelCased
