@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'player_info.rb'
 require 'cards.rb'
 

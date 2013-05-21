@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 class Card
 	attr_accessor :num, :suit
 	attr_accessor :nums, :suits
