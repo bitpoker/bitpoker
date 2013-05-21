@@ -27,8 +27,8 @@ class Game
 	end
 
 	def raise(value)
-		if Player.getMoney <= value && bet <= Player.getMoney
-			bet = value
+		if Player.get_money <= value && bet <= Player.get_money
+			@bet = value
 				return @value
 		else
 			puts "Money must be greater than raise"
