@@ -42,31 +42,31 @@ class Game
 			puts "Money must be greater than bet"
 		end
 	end
+	
+	def betting_round
+		for player in players
+			@roundPlayers = Array.new(players)
+			print "Enter betting action: "
+        		turn = gets
+        		if turn == "raise"
+				print "Enter bet raise: "
+            			value = gets
+            			raise(value)
+        		elsif turn == "call"
+            			call
+        		elsif turn == "fold"
+				@roundPlayers = array.delete(player)
+			elsif turn == "check"
+            			if bet == NULL
+					bet = 0
+				end
+			end
+		end
+	end
 
 	def play_turn
 		@field = Field.new()
 		@deck = Deck.new()
 		betting_round
-	end
-
-	def betting_round
-		for player in players
-			@roundPlayers = Array.new(players)
-			print "Enter betting action: "
-        	turn = gets
-        	if turn == "raise"
-				print "Enter bet raise: "
-            	value = gets
-            	raise(value)
-        	elsif turn == "call"
-            	call
-        	elsif turn == "fold"
-				@roundPlayers = array.delete(player)
-			elsif turn == "check"
-            	if bet == NULL
-					bet = 0
-				end
-			end
-		end
 	end
 end
