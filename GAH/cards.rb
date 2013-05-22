@@ -3,10 +3,11 @@
 class Card
 	attr_accessor :num, :suit
 	attr_accessor :nums, :suits
-	
+
 	@@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]
 	@@suits = [:D, :C, :H, :S]
 
+	# Create the card object
 	def initialize(num, suit)
 		if nums.include?(num) && suits.include?(suit)
 			@num = num
@@ -22,6 +23,7 @@ end
 class Deck
 	attr_accessor :cards
 
+	# Create the deck object
 	def initialize
 		@cards = Array.new()
 		#right now it is in order
@@ -33,32 +35,36 @@ class Deck
 		end
 	end
 
+	# Delete a card
 	def del_card(card)
 		discard.push cards.delete(card)
+	end
 
+	# Discard first card from deck, for burning
 	def del_first
-		#discard first card from deck, for burning
 		discard.push cards.delete_at 0
 	end
 
+	# Discard last card from deck
 	def del_last
-		#discard last card from deck
 		cards.delete_at -1
 	end
 
+	# Moves cards from top of deck to hand
 	def shift_to_hand(numCards, hand)
-		#moves cards from top of deck to hand
 		hand.push cards.slice!(0, numCards)
 	end
 
+	# Moves cards from top of deck to field
 	def shift_to_field(numCards, field)
-		#moves cards from top of deck to field
 		field.push cards.slice!(0, numCards)
 	end
 end
 
 class DiscardPile
 	attr_accessor :discard
+
+	# Create the discard pile object
 	def initialize
 		@discard = Array.new()
 	end
@@ -71,10 +77,11 @@ end
 class Calculations
 	attr_accessor :field, :hand, :combined
 	attr_accessor :nums, :suits
-	
+
 	@@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]i
 	@@suits = [:D, :C, :H, :S]
 
+	# Create an object for calculations
 	def initialize(field, hand)
 		@field = field
 		@hand = hand
@@ -140,6 +147,8 @@ end
 
 class Hand
 	attr_accessor :hand
+
+	# Create the hand object
 	def initialize
 		@hand = []
 	end
@@ -152,10 +161,12 @@ end
 class Field
 	attr_accessor :field
 
+	# Create the field object
 	def initialize
 		@field = []
 	end
 
+	# Clear the field
 	def discard_field
 		field.clear
 	end
