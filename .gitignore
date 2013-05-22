@@ -27,6 +27,9 @@ Thumbs.db
 # Ignore VIM files
 *.swp
 
+# Ignore Eclipse files
+*.metadata/
+
 # Backups
 *~
 \#*\#
