@@ -9,7 +9,7 @@ class Card
 
 	# Create the card object
 	def initialize(num, suit)
-		if nums.include?(num) && suits.include?(suit)
+		if nums.include?(num) and suits.include?(suit)
 			@num = num
 			@suit = suit
 		end
@@ -75,10 +75,11 @@ class DiscardPile
 end
 
 class Calculations
+	# modify this so it only considers the 5 cards used from hand and field
 	attr_accessor :field, :hand, :combined
 	attr_accessor :nums, :suits
 
-	@@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]i
+	@@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]
 	@@suits = [:D, :C, :H, :S]
 
 	# Create an object for calculations
@@ -112,6 +113,14 @@ class Calculations
 		end
 	end
 
+	def combined_strength
+		
+	end
+	
+	def royal_flush
+		return straight_flush and combined.at(0) == 10
+	end
+
 	def straight_flush
 		numbers = []
 		combined.each {|x| numbers = x.card_strength - combined.index(x)}
@@ -119,11 +128,11 @@ class Calculations
 	end
 
 	def full_house
-		combined.combined_nums.count(3) > 0 && combined.combined_nums.count(2) > 0
+		return combined.combined_nums.count(3) > 0 and combined.combined_nums.count(2) > 0
 	end
 
 	def flush
-		combined.suit_numbers > 4
+		return combined.suit_numbers > 4
 	end
 
 	def straight
@@ -133,15 +142,15 @@ class Calculations
 	end
 
 	def three_of_a_kind
-		combined.combined_nums.count(3) > 0
+		return combined.combined_nums.count(3) > 0
 	end
 
 	def two_pair
-		combined.combined_nums.count(2) > 1
+		return combined.combined_nums.count(2) > 1
 	end
 
 	def pair
-		combined.combined_nums.count(2) > 0
+		return combined.combined_nums.count(2) > 0
 	end
 end
 
@@ -151,10 +160,6 @@ class Hand
 	# Create the hand object
 	def initialize
 		@hand = []
-	end
-
-	def shift_to_field(card)
-		field.push hand.slice!(card)
 	end
 end
 
