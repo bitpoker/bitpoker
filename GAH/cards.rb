@@ -1,17 +1,19 @@
+{ :J => 11, :Q => 11, :K => 12, :A => 13 }
+NUMS = [ 2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A ]
+
+{ :D => 0, :C => 14, :H => 28, :S => 42 }
+SUITS = [ :D, :C, :H, :S ]
+
 class Card
 	attr_accessor :num, :suit
-	attr_accessor :nums, :suits
 
 	def initialize num, suit
-		@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]
-		@suits = [:D, :C, :H, :S]
-
 		@num = num
 		@suit = suit
 	end
 
 	def card_strength
-		return (@nums.index(num) * 10) + (@suits.index(suit))
+		return @suit + @num;
 	end
 end
 
@@ -20,8 +22,8 @@ class Deck
 
 	def initialize
 		@cards = Array.new()
-		for num in Card.nums
-			for suit in Card.suit
+		for suit in SUITS
+			for num in NUMS
 				@card = Card.new(num, suit)
 				cards << card
 			end
@@ -30,43 +32,39 @@ class Deck
 
 	def add_last_card card
 		#add to end of the deck
-		cards.push card
+		@cards.push card
 	end
 
 	def add_first_card card
 		#add to front of deck
-		cards.unshift card
+		@cards.unshift card
 	end
 
 	def del_card card
 		#discard card from deck
-		cards.delete card
+		@cards.delete card
 	end
 
 	def del_first
 		#discard first card from deck
-		cards.delete_at 0
+		@cards.delete_at 0
 	end
 
 	def del_last
 		#discard last card from deck
-		cards.delete_at -1
+		@cards.delete_at -1
 	end
 
-	def shift_to_field (numCards, Field)
+	def shift_to_field (numCards, field)
 		#moves cards from top of deck to field
-		Field.field.push cards.slice(0, numCards)
+		field.push @cards.slice(0, numCards)
 	end
 end
 
 class Calculations
 	attr_accessor :field, :hand, :combined
-	attr_accessor :nums, :suits
 
 	def initialize field, hand
-		@nums = [2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A]
-		@suits = [:D, :C, :H, :S]
-
 		@field = field
 		@hand = hand
 		@combined = field.concat hand
@@ -78,20 +76,20 @@ class Calculations
 			@nums.index(a.num) <=> @nums.index(b.num)
 		end
 		@combined.sort! do |a, b|
-			@suits.index(a.suit) <=> @suits.index(b.suit)
+			a.suit <=> b.suit
 		end
 	end
 
 	def card_numbers
 		@combined_nums = combined.map { |x| x.num}
-		nums.map do |x|
+		NUMS.map do |x|
 			combined_nums.count x
 		end
 	end
 
 	def suit_numbers
 		@combined_suit = combined.map { |x| x.suit }
-		suits.map do |x|
+		SUITS.map do |x|
 			combined_suit.count x
 		end
 	end
@@ -112,7 +110,7 @@ class Calculations
 
 	def straight
 		numbers = []
-		combined.each {|x| numbers = nums.index(x.num) - combined.index(x)}
+		combined.each {|x| numbers = x.num - combined.index(x)}
 		return numbers.size - numbers.uniq.size > 4
 	end
 
