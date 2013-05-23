@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 { :J => 11, :Q => 11, :K => 12, :A => 13 }
 NUMS = [ 2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A ]
 
@@ -7,9 +9,12 @@ SUITS = [ :D, :C, :H, :S ]
 class Card
 	attr_accessor :num, :suit
 
-	def initialize num, suit
-		@num = num
-		@suit = suit
+	# Create the card object
+	def initialize(num, suit)
+		if NUMS.include?(num) and SUITS.include?(suit)
+			@num = num
+			@suit = suit
+		end
 	end
 
 	def card_strength
@@ -20,8 +25,10 @@ end
 class Deck
 	attr_accessor :cards
 
+	# Create the deck object
 	def initialize
 		@cards = Array.new()
+		#right now it is in order
 		for suit in SUITS
 			for num in NUMS
 				@card = Card.new(num, suit)
@@ -30,41 +37,51 @@ class Deck
 		end
 	end
 
-	def add_last_card card
-		#add to end of the deck
-		@cards.push card
+	# Delete a card
+	def del_card(card)
+		discard.push cards.delete(card)
 	end
 
-	def add_first_card card
-		#add to front of deck
-		@cards.unshift card
-	end
-
-	def del_card card
-		#discard card from deck
-		@cards.delete card
-	end
-
+	# Discard first card from deck, for burning
 	def del_first
-		#discard first card from deck
-		@cards.delete_at 0
+		discard.push cards.delete_at 0
 	end
 
+	# Discard last card from deck
 	def del_last
-		#discard last card from deck
-		@cards.delete_at -1
+		cards.delete_at -1
 	end
 
-	def shift_to_field (numCards, field)
-		#moves cards from top of deck to field
-		field.push @cards.slice(0, numCards)
+	# Moves cards from top of deck to hand
+	def shift_to_hand(numCards, hand)
+		hand.push cards.slice!(0, numCards)
+	end
+
+	# Moves cards from top of deck to field
+	def shift_to_field(numCards, field)
+		field.push cards.slice!(0, numCards)
+	end
+end
+
+class DiscardPile
+	attr_accessor :discard
+
+	# Create the discard pile object
+	def initialize
+		@discard = Array.new()
+	end
+
+	def add_to_deck
+		deck.push discard.slice!(0, discard.size-1)
 	end
 end
 
 class Calculations
+	# modify this so it only considers the 5 cards used from hand and field
 	attr_accessor :field, :hand, :combined
 
-	def initialize field, hand
+	# Create an object for calculations
+	def initialize(field, hand)
 		@field = field
 		@hand = hand
 		@combined = field.concat hand
@@ -94,6 +111,14 @@ class Calculations
 		end
 	end
 
+	def combined_strength
+
+	end
+
+	def royal_flush
+		return straight_flush and combined.at(0) == 10
+	end
+
 	def straight_flush
 		numbers = []
 		combined.each {|x| numbers = x.card_strength - combined.index(x)}
@@ -101,11 +126,11 @@ class Calculations
 	end
 
 	def full_house
-		combined.combined_nums.count(3) > 0 && combined.combined_nums.count(2) > 0
+		return combined.combined_nums.count(3) > 0 and combined.combined_nums.count(2) > 0
 	end
 
 	def flush
-		combined.suit_numbers > 4
+		return combined.suit_numbers > 4
 	end
 
 	def straight
@@ -115,36 +140,38 @@ class Calculations
 	end
 
 	def three_of_a_kind
-		combined.combined_nums.count(3) > 0
+		return combined.combined_nums.count(3) > 0
 	end
 
 	def two_pair
-		combined.combined_nums.count(2) > 1
+		return combined.combined_nums.count(2) > 1
 	end
 
 	def pair
-		combined.combined_nums.count(2) > 0
+		return combined.combined_nums.count(2) > 0
 	end
 end
 
 class Hand
 	attr_accessor :hand
+
+	# Create the hand object
 	def initialize
 		@hand = []
-	end
-	def add_card card
-		cards.push card
-	end
-	def rm_card card
-		cards.delete card
 	end
 end
 
 class Field
 	attr_accessor :field
 
+	# Create the field object
 	def initialize
 		@field = []
+	end
+
+	# Clear the field
+	def discard_field
+		field.clear
 	end
 end
 
