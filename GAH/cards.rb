@@ -1,177 +1,154 @@
 #!/usr/bin/env ruby
 
-{ :J => 11, :Q => 11, :K => 12, :A => 13 }
-NUMS = [ 2, 3, 4, 5, 6, 7, 8, 9, 10, :J, :Q, :K, :A ]
-
-{ :D => 0, :C => 14, :H => 28, :S => 42 }
-SUITS = [ :D, :C, :H, :S ]
-
 class Card
-	attr_accessor :num, :suit
+	RANKS = { 2 => 0, 3 => 1, 4 => 2, 5 => 3, 6 => 4, 7 => 5, 8 => 6, 9 => 7, 10 => 8, :jack => 9, :queen => 10, :king => 11, :ace => 12 }
+	SUITS = { :diamonds => 0, :clubs => 13, :hearts => 26, :spades => 39 }
+
+	attr_accessor :rank, :suit
 
 	# Create the card object
-	def initialize(num, suit)
-		if NUMS.include?(num) and SUITS.include?(suit)
-			@num = num
+	def initialize(rank, suit)
+		if RANKS.include?(rank) and SUITS.include?(suit)
+			@rank = rank
 			@suit = suit
 		end
 	end
 
-	def card_strength
-		return @suit + @num;
-	end
-end
-
-class Deck
-	attr_accessor :cards
-
-	# Create the deck object
-	def initialize
-		@cards = Array.new()
-		#right now it is in order
-		for suit in SUITS
-			for num in NUMS
-				@card = Card.new(num, suit)
-				cards << card
-			end
+	def initialize(id)
+		if id >= 0 and id < 52
+			@rank = RANKS.key(id % 13)
+			@suit = SUITS.key(id - id % 13)
 		end
 	end
 
-	# Delete a card
-	def del_card(card)
-		discard.push cards.delete(card)
-	end
-
-	# Discard first card from deck, for burning
-	def del_first
-		discard.push cards.delete_at 0
-	end
-
-	# Discard last card from deck
-	def del_last
-		cards.delete_at -1
-	end
-
-	# Moves cards from top of deck to hand
-	def shift_to_hand(numCards, hand)
-		hand.push cards.slice!(0, numCards)
-	end
-
-	# Moves cards from top of deck to field
-	def shift_to_field(numCards, field)
-		field.push cards.slice!(0, numCards)
+	def id
+		return SUITS[@suit] + RANKS[@rank];
 	end
 end
 
-class DiscardPile
-	attr_accessor :discard
-
-	# Create the discard pile object
+class Deck < Array
+	# Create the deck object
 	def initialize
-		@discard = Array.new()
+		# Initialize cards in order
+		super( (0..51).map { |id| Card.new(id) })
 	end
 
-	def add_to_deck
-		deck.push discard.slice!(0, discard.size-1)
+	# Get a card
+	def get(card)
+		return delete(card)
+	end
+
+	# Draw a card
+	def draw
+		return shift
+	end
+
+	# Draw n cards
+	def draw(n)
+		return shift(n)
 	end
 end
 
-class Calculations
-	# modify this so it only considers the 5 cards used from hand and field
-	attr_accessor :field, :hand, :combined
+class PokerCalculations
+	attr_accessor :cards
 
 	# Create an object for calculations
-	def initialize(field, hand)
-		@field = field
-		@hand = hand
-		@combined = field.concat hand
+	def initialize(cards)
+		@cards = cards;
 		sort_combined
+
+		ranks = @cards.map { |x| x.rank}
+		@rank_freqs = ranks.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+
+		suits = @cards.map { |x| x.suit }
+		@suit_freqs = suits.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
 	end
 
 	def sort_combined
-		@combined.sort! do |a, b|
-			@nums.index(a.num) <=> @nums.index(b.num)
-		end
-		@combined.sort! do |a, b|
-			a.suit <=> b.suit
+		@cards.sort! do |a, b|
+			a.id <=> b.id
 		end
 	end
 
-	def card_numbers
-		@combined_nums = combined.map { |x| x.num}
-		NUMS.map do |x|
-			combined_nums.count x
+	def highest_hand
+		if(straight)
+			hasStraight = true
+			if(flush)
+				hasFlush = true
+				if(straight_flush)
+					if(royal_flush)
+						return "royal flush"
+					end
+					return "straight flush"
+				end
+			end
 		end
-	end
-
-	def suit_numbers
-		@combined_suit = combined.map { |x| x.suit }
-		SUITS.map do |x|
-			combined_suit.count x
+		if(four_of_a_kind)
+			return "four of a kind"
 		end
-	end
-
-	def combined_strength
-
-	end
-
-	def royal_flush
-		return straight_flush and combined.at(0) == 10
+		if(three_of_a_kind)
+			hasThreeKind = true
+			if(pair)
+				hasPair = true
+				return "full house"
+			end
+		end
+		if(hasFlush || flush)
+			return "flush"
+		end
+		if(hasStraight)
+			return "straight"
+		end
+		if(hasThreeKind)
+			return "three of a kind"
+		end
+		if(hasPair || pair)
+			if(two_pair)
+				return "two pair"
+			end
+			return "pair"
+		end
+		return "high card"
 	end
 
 	def straight_flush
 		numbers = []
-		combined.each {|x| numbers = x.card_strength - combined.index(x)}
+		@cards.each {|x| numbers = x.id - combined.index(x)}
 		return numbers.length - numbers.uniq.length > 4
 	end
 
+	def royal_flush
+		return (straight_flush and @cards.at(0) == 10)
+	end
+
+	def four_of_a_kind
+		return @rank_counts.count(4) > 0
+	end
+
 	def full_house
-		return combined.combined_nums.count(3) > 0 and combined.combined_nums.count(2) > 0
+		return (three_of_a_kind and pair)
 	end
 
 	def flush
-		return combined.suit_numbers > 4
+		return @suit_freqs.count(5) > 0;
 	end
 
 	def straight
 		numbers = []
-		combined.each {|x| numbers = x.num - combined.index(x)}
+		@cards.each {|x| numbers = x.rank - @cards.index(x)}
 		return numbers.size - numbers.uniq.size > 4
 	end
 
 	def three_of_a_kind
-		return combined.combined_nums.count(3) > 0
+		return @rank_counts.count(3) > 0
 	end
 
 	def two_pair
-		return combined.combined_nums.count(2) > 1
+		return @rank_counts.count(2) > 1
 	end
 
 	def pair
-		return combined.combined_nums.count(2) > 0
-	end
-end
-
-class Hand
-	attr_accessor :hand
-
-	# Create the hand object
-	def initialize
-		@hand = []
-	end
-end
-
-class Field
-	attr_accessor :field
-
-	# Create the field object
-	def initialize
-		@field = []
-	end
-
-	# Clear the field
-	def discard_field
-		field.clear
+		return @rank_counts.count(2) > 0
 	end
 end
 
