@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'player_info.rb'
-require 'cards.rb'
+require_relative 'player_info.rb'
+require_relative 'cards.rb'
 
 class Game
 	attr_accessor :players

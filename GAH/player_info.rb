@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'cards.rb'
+require_relative 'cards.rb'
 
 class User
 	attr_accessor :username
