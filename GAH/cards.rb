@@ -6,22 +6,26 @@ class Card
 
 	attr_accessor :rank, :suit
 
-	# Create the card object
-	def initialize(rank, suit)
-		if RANKS.include?(rank) and SUITS.include?(suit)
-			@rank = rank
-			@suit = suit
-		end
-	end
+    # 	I'm assuming that this one is no longer needed ~William
+# 	def initialize(rank, suit)
+# 		if RANKS.include?(rank) and SUITS.include?(suit)
+# 			@rank = rank
+# 			@suit = suit
+# 		end
+# 	end
 
+	# Create the card object
 	def initialize(id)
 		if id >= 0 and id < 52
 			@rank = RANKS.key(id % 13)
 			@suit = SUITS.key(id - id % 13)
+        else
+            puts "Card value is out of range"
 		end
 	end
 
 	def id
+        puts @rank, @suit
 		return SUITS[@suit] + RANKS[@rank];
 	end
 end
@@ -74,14 +78,13 @@ class PokerCalculations
 		if(straight)
 			hasStraight = true
 			if(flush)
-				hasFlush = true
-				if(straight_flush)
-					if(royal_flush)
-						return "royal flush"
-					end
-					return "straight flush"
-				end
-			end
+                hasFlush = true
+                if(royal_flush)
+                    return "royal flush"
+                else
+                    return "straight flush"
+                end
+            end
 		end
 		if(four_of_a_kind)
 			return "four of a kind"
