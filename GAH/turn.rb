@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 require_relative 'player_info.rb'
 require_relative 'cards.rb'
 

@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 class Card
 	RANKS = { 2 => 0, 3 => 1, 4 => 2, 5 => 3, 6 => 4, 7 => 5, 8 => 6, 9 => 7, 10 => 8, :jack => 9, :queen => 10, :king => 11, :ace => 12 }
 	SUITS = { :diamonds => 0, :clubs => 13, :hearts => 26, :spades => 39 }
@@ -79,10 +77,12 @@ class PokerCalculations
 			hasStraight = true
 			if(flush)
 				hasFlush = true
-				if(royal_flush)
-					return "royal flush"
+				if(straight_flush)
+					if(royal_flush)
+						return "royal flush"
+					end
+					return "straight flush"
 				end
-				return "straight flush"
 			end
 		end
 		if(four_of_a_kind)
@@ -114,7 +114,7 @@ class PokerCalculations
 	end
 
 	def straight_flush
-		return (straight and flush) 
+		return (straight and flush)
 	end
 
 	def royal_flush
