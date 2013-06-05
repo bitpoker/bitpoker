@@ -75,12 +75,10 @@ class PokerCalculations
 			hasStraight = true
 			if(flush)
 				hasFlush = true
-				if(straight_flush)
-					if(royal_flush)
-						return "royal flush"
-					end
-					return "straight flush"
+				if(royal_flush)
+					return "royal flush"
 				end
+				return "straight flush"
 			end
 		end
 		if(four_of_a_kind)
@@ -112,9 +110,7 @@ class PokerCalculations
 	end
 
 	def straight_flush
-		numbers = []
-		@cards.each {|x| numbers = x.id - combined.index(x)}
-		return numbers.length - numbers.uniq.length > 4
+		return (straight and flush) 
 	end
 
 	def royal_flush

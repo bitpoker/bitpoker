@@ -1,11 +1,10 @@
 #!/usr/bin/env ruby
 
-require 'player_info.rb'
-require 'cards.rb'
+require_relative 'player_info.rb'
+require_relative 'cards.rb'
 
 class Game
 	attr_accessor :players
-	attr_accessor :roundPlayers
 	attr_accessor :numPlayers
 	attr_accessor :bet
 	attr_accessor :field
@@ -34,7 +33,7 @@ class Game
 
 	# Place a higher bet than previous players
 	def raise(value)
-		if get_money >= value and value >= bet
+		if Player.get_money >= value && value >= bet
 			@bet = value
 			return @value
 		else
@@ -47,7 +46,7 @@ class Game
 		if money >= bet
 			return @bet
 		else
-			puts "Money must be greater than current bet"
+			puts "Money must be greater than bet"
 		end
 	end
 
@@ -65,25 +64,14 @@ class Game
 			elsif turn == "fold"
 				@roundPlayers = array.delete(player)
 			elsif turn == "check"
-				if bet == nil
+				if bet == NULL
 					bet = 0
 				end
-			else
-				puts "Invalid betting action"
 			end
 		end
 	end
 
-	def choose_cards
-
-	end
-
-	def compare_hands
-	
-	end
-
 	def play_turn
-		@field = Field.new()
 		@deck = Deck.new()
 		betting_round
 	end
