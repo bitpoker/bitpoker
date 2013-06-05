@@ -33,7 +33,7 @@ class Game
 
 	# Place a higher bet than previous players
 	def raise(value)
-		if Player.get_money >= value && value >= bet
+		if (Player.get_money >= value and value >= bet)
 			@bet = value
 			return @value
 		else
