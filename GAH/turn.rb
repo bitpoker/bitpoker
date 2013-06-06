@@ -3,7 +3,7 @@ require_relative 'cards.rb'
 
 class Game
 	attr_accessor :players
-	attr_accessor :numPlayers
+	attr_accessor :num_players
 	attr_accessor :bet
 	attr_accessor :field
 	attr_accessor :deck
@@ -11,12 +11,12 @@ class Game
 	# Create the game object
 	def initialize(players)
 		@players = Array.new(players)
-		@numPlayers = players.size
+		@num_players = players.size
 	end
 
 	def update_size
-		@numPlayers = players.size
-		# Perhaps we should avoid the @numPlayers variable altogether,
+		@num_players = players.size
+		# Perhaps we should avoid the @num_players variable altogether,
 		# as it does not save much typing and presents an extra layer
 		# of abstraction. ~William
 	end
@@ -29,14 +29,14 @@ class Game
 		for player in players
 			puts player
 		end
-		puts "Number of players: #{@numPlayers}"
+		puts "Number of players: #{@num_players}"
 	end
 
 	# Add a player to the array
 	def add_player(player)
-		if numPlayers < 7 # Why is this value hardcoded? ~William
+		if num_players < 7 # Why is this value hardcoded? ~William
 			players << player
-			@numPlayers += 1 # numPlayers should be an instance variable ~William
+			@num_players += 1 # numPlayers should be an instance variable ~William
 		end
 	end
 
@@ -46,7 +46,7 @@ class Game
 			players.delete(player)
 			# If there are multiple players by the same name, the
 			# above deletes all of them. ~William
-			@numPlayers -= 1
+			@num_players -= 1
 		end
 	end
 

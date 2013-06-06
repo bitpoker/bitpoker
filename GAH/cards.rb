@@ -153,4 +153,4 @@ class PokerCalculations
 end
 
 # methods, variables: snake_cased
-# classes: camelCased
+# classes: CamelCased
