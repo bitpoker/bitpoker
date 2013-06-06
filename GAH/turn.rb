@@ -14,11 +14,29 @@ class Game
 		@numPlayers = players.size
 	end
 
+	def update_size
+		@numPlayers = players.size
+		# Perhaps we should avoid the @numPlayers variable altogether,
+		# as it does not save much typing and presents an extra layer
+		# of abstraction. ~William
+	end
+
+	def list_players
+		players.each do |player|
+			puts player
+		end
+		# Which way is better? ~William
+		for player in players
+			puts player
+		end
+		puts "Number of players: #{@numPlayers}"
+	end
+
 	# Add a player to the array
 	def add_player(player)
-		if numPlayers < 7
+		if numPlayers < 7 # Why is this value hardcoded? ~William
 			players << player
-			numPlayers += 1
+			@numPlayers += 1 # numPlayers should be an instance variable ~William
 		end
 	end
 
@@ -26,6 +44,9 @@ class Game
 	def rm_player(player)
 		if players.include?(player)
 			players.delete(player)
+			# If there are multiple players by the same name, the
+			# above deletes all of them. ~William
+			@numPlayers -= 1
 		end
 	end
 
