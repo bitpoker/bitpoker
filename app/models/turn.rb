@@ -1,11 +1,9 @@
-#!/usr/bin/env ruby
-
 require_relative 'player_info.rb'
 require_relative 'cards.rb'
 
 class Game
 	attr_accessor :players
-	attr_accessor :numPlayers
+	attr_accessor :num_players
 	attr_accessor :bet
 	attr_accessor :field
 	attr_accessor :deck
@@ -13,14 +11,19 @@ class Game
 	# Create the game object
 	def initialize(players)
 		@players = Array.new(players)
-		@numPlayers = players.size
+	end
+
+	def list_players
+		for player in players
+			puts player
+		end
+		puts "Number of players: #{players.size}"
 	end
 
 	# Add a player to the array
 	def add_player(player)
-		if numPlayers < 7
+		if players.size < 7 # Why is this value hardcoded? ~William
 			players << player
-			numPlayers += 1
 		end
 	end
 
@@ -28,6 +31,8 @@ class Game
 	def rm_player(player)
 		if players.include?(player)
 			players.delete(player)
+			# If there are multiple players by the same name, the
+			# above deletes all of them. ~William
 		end
 	end
 
