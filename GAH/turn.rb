@@ -11,32 +11,19 @@ class Game
 	# Create the game object
 	def initialize(players)
 		@players = Array.new(players)
-		@num_players = players.size
-	end
-
-	def update_size
-		@num_players = players.size
-		# Perhaps we should avoid the @num_players variable altogether,
-		# as it does not save much typing and presents an extra layer
-		# of abstraction. ~William
 	end
 
 	def list_players
-		players.each do |player|
-			puts player
-		end
-		# Which way is better? ~William
 		for player in players
 			puts player
 		end
-		puts "Number of players: #{@num_players}"
+		puts "Number of players: #{players.size}"
 	end
 
 	# Add a player to the array
 	def add_player(player)
-		if num_players < 7 # Why is this value hardcoded? ~William
+		if players.size < 7 # Why is this value hardcoded? ~William
 			players << player
-			@num_players += 1 # numPlayers should be an instance variable ~William
 		end
 	end
 
@@ -46,7 +33,6 @@ class Game
 			players.delete(player)
 			# If there are multiple players by the same name, the
 			# above deletes all of them. ~William
-			@num_players -= 1
 		end
 	end
 
