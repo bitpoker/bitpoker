@@ -4,52 +4,52 @@
 @import "foundation";
 
 html {
-    height: 100%;
+  height: 100%;
 }
 
 body {
-    position: static;
+  position: static;
 }
 
 #header {
-    #title {
-	margin-bottom: -.9em;
-	vertical-align: top;
+  #title {
+		margin-bottom: -.5em;
+		vertical-align: top;
 
-	img {
+		img {
 	    height: 1.7em;
 			vertical-align: top;
-	}
-    }
+		}
+  }
 
-    #version {
-	font-size: .8em;
-	margin-left: 1em;
-    }
+  #version {
+		font-size: .8em;
+		margin-left: 1em;
+  }
 }
 
 #title-message {
-    text-align: center;
+  text-align: center;
 }
 
 #register-wrapper,
 #login-wrapper {
-    margin-top: 50px;
+  margin-top: 50px;
 
-    label {
-	text-align: left;
-	cursor: default;
-	margin-bottom: 10px;
-    }
+  label {
+		text-align: left;
+		cursor: default;
+		margin-bottom: 10px;
+  }
 
-    #button-row {
-	margin-top: 20px;
-    }
+  #button-row {
+		margin-top: 20px;
+  }
 }
 
 .row {
-    table,
-    .button {
-	width: 100%;
-    }
+  table,
+  .button {
+		width: 100%;
+  }
 }
